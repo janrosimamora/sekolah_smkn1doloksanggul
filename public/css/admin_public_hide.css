@@ -1,0 +1,31 @@
+.admin-active .admin-hide-on-public,
+.admin-active .admin-hide-on-public * {
+  display: none !important;
+}
+.admin-active body {
+  overflow-x: hidden;
+}
+
+/* Hindari elemen tetap terlihat karena z-index/position ketika admin aktif */
+.admin-active #adminPanel {
+  position: relative;
+  z-index: 60;
+}
+
+/* Sembunyikan seluruh konten halaman utama saat panel admin aktif */
+.admin-active #public-content,
+.admin-active #public-content * {
+  display: block !important;
+}
+
+/* Pastikan area panel admin tetap terlihat */
+.admin-active #adminPanel,
+.admin-active #adminPanel * {
+  display: block !important;
+}
+
+
+
+
+
+

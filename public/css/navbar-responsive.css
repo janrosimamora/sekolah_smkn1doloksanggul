@@ -1,0 +1,194 @@
+/* Navbar Responsive (Mobile <= 768px)
+   - Desktop: tetap seperti existing.
+   - Mobile: logo kiri + tombol Beranda & Akademik + hamburger.
+   - Overlay dropdown vertikal + smooth accordion.
+*/
+
+:root{
+  --nav-primary:#2563eb; /* fallback */
+  --nav-primary-2:#1d4ed8;
+  --nav-text:#111827;
+  --nav-muted:#6b7280;
+  --nav-border:rgba(0,0,0,.08);
+}
+
+.navbar-mobile-only{display:none;}
+
+/* Mobile breakpoint */
+@media (max-width: 768px){
+  /* Wajib: sembunyikan menu desktop agar tidak meluber/berantakan */
+  .navbar-desktop-only{display:none !important;}
+
+  /* Tombol mobile (Beranda + Akademik + Hamburger) */
+  .navbar-mobile-only{display:flex !important;}
+
+  /* Buat teks sekolah paling atas menjadi lebih kecil */
+  .navbar-school-title{font-size:14px !important;}
+
+  /* Pastikan modal login bisa diklik di mobile */
+  #loginModal{pointer-events:auto;}
+}
+
+
+
+/* Container */
+#navbar{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";}
+
+/* Buttons */
+.navbar-mobile-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  padding:.65rem 1rem;
+  border-radius:14px;
+  border:1px solid var(--nav-border);
+  background:#fff;
+  color:var(--nav-text);
+  font-weight:800;
+  font-size:.95rem;
+  line-height:1;
+  transition: transform .15s ease, background .2s ease, border-color .2s ease, color .2s ease;
+}
+.navbar-mobile-btn:active{transform:scale(.98);}
+.navbar-mobile-btn:hover{
+  border-color: rgba(37,99,235,.35);
+}
+
+.navbar-mobile-btn-primary{
+  border-color: rgba(37,99,235,.35);
+  background:rgba(37,99,235,.08);
+  color: var(--nav-primary-2);
+}
+
+.navbar-hamburger{
+  width:46px;
+  height:46px;
+  padding:0;
+  border-radius:14px;
+  border:1px solid var(--nav-border);
+  background:#fff;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition: transform .15s ease, border-color .2s ease;
+}
+.navbar-hamburger:active{transform:scale(.98);}
+.navbar-hamburger:hover{border-color: rgba(37,99,235,.35);} 
+
+/* Overlay menu */
+.navbar-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(17,24,39,.25);
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .2s ease;
+  z-index:60;
+}
+.navbar-overlay.navbar-overlay--open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.navbar-overlay-panel{
+  position:absolute;
+  top:84px; /* just below navbar */
+  right:12px;
+  left:12px;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,.18);
+  border:1px solid rgba(0,0,0,.06);
+  overflow:hidden;
+  transform: translateY(-6px);
+  opacity:0;
+  transition: transform .22s ease, opacity .22s ease;
+}
+.navbar-overlay--open .navbar-overlay-panel{
+  transform: translateY(0);
+  opacity:1;
+}
+
+.navbar-menu{
+  padding:10px;
+}
+
+.navbar-menu-item{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:13px 12px;
+  border-radius:14px;
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--nav-text);
+  font-weight:900;
+  cursor:pointer;
+  transition: background .15s ease, border-color .15s ease;
+}
+.navbar-menu-item:hover{
+  background:rgba(37,99,235,.06);
+  border-color:rgba(37,99,235,.18);
+}
+
+.navbar-menu-link{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  width:100%;
+  padding:11px 12px;
+  border-radius:14px;
+  color:var(--nav-text);
+  font-weight:800;
+  text-decoration:none;
+  border:1px solid transparent;
+  background:transparent;
+  transition: background .15s ease, border-color .15s ease;
+}
+.navbar-menu-link:hover{
+  background:rgba(17,24,39,.04);
+  border-color:rgba(0,0,0,.08);
+}
+
+.chevron{
+  width:28px;
+  height:28px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(37,99,235,.06);
+  color: var(--nav-primary-2);
+}
+
+/* Accordion smooth */
+.accordion-wrap{
+  overflow:hidden;
+  height:0;
+  transition: height .28s ease;
+}
+
+.accordion-inner{
+  padding:0 10px 10px 10px;
+}
+
+.accordion-lead{
+  margin:0;
+  padding:0 12px 10px 12px;
+  font-size:12px;
+  letter-spacing:.08em;
+  color:var(--nav-muted);
+  text-transform:uppercase;
+  font-weight:900;
+}
+
+/* Useful when JS sets active */
+.navbar-menu-item--active{
+  background:rgba(37,99,235,.08);
+  border-color:rgba(37,99,235,.22);
+}
+

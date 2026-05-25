@@ -1,0 +1,66 @@
+-- ============================================================
+-- ORACLE SQL DEVELOPER SETUP SCRIPT
+-- SMK Negeri 1 Dolok Sanggul - PPDB & TRACER ALUMNIS
+--
+-- Tujuan:
+-- 1) Buat tabel TRACER_ALUMNIS di Oracle (jika belum ada)
+-- 2) Buat trigger/sequence untuk ID auto-increment
+--
+-- Jalankan di Oracle SQL Developer.
+-- ============================================================
+
+-- =========================
+-- TRACER_ALUMNIS
+-- =========================
+
+-- Hapus tabel jika sudah ada
+BEGIN
+  EXECUTE IMMEDIATE 'DROP TABLE TRACER_ALUMNIS CASCADE CONSTRAINTS';
+EXCEPTION
+  WHEN OTHERS THEN
+    NULL;
+END;
+/
+
+-- Buat tabel TRACER_ALUMNIS
+CREATE TABLE TRACER_ALUMNIS (
+  ID NUMBER(19,0) NOT NULL PRIMARY KEY,
+  NAMA VARCHAR2(100) NOT NULL,
+  ANGKATAN NUMBER(4,0) NOT NULL,
+  PEKERJAAN_KULIAH VARCHAR2(255) NOT NULL,
+  STATUS VARCHAR2(20) NOT NULL,
+  DETAIL CLOB NULL,
+  CREATED_AT TIMESTAMP NULL,
+  UPDATED_AT TIMESTAMP NULL
+);
+
+-- Sequence
+BEGIN
+  EXECUTE IMMEDIATE 'DROP SEQUENCE TRACER_ALUMNIS_ID_SEQ';
+EXCEPTION
+  WHEN OTHERS THEN
+    NULL;
+END;
+/
+
+CREATE SEQUENCE TRACER_ALUMNIS_ID_SEQ START WITH 1 INCREMENT BY 1;
+
+-- Trigger auto increment ID
+CREATE OR REPLACE TRIGGER TRACER_ALUMNIS_ID_TRG
+BEFORE INSERT ON TRACER_ALUMNIS
+FOR EACH ROW
+BEGIN
+  IF :NEW.ID IS NULL THEN
+    SELECT TRACER_ALUMNIS_ID_SEQ.NEXTVAL INTO :NEW.ID FROM DUAL;
+  END IF;
+END;
+/
+
+-- Index opsional (untuk performa filter jika dibutuhkan)
+-- CREATE INDEX IDX_TRACER_STATUS ON TRACER_ALUMNIS(STATUS);
+
+COMMIT;
+
+-- Verifikasi
+SELECT * FROM TRACER_ALUMNIS;
+
