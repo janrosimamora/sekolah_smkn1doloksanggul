@@ -7,8 +7,6 @@ Berikut adalah hasil tampilan dari website ini:
 
 ![Tampilan Web Sekolah](https://github.com/janrosimamora/sekolah_smkn1doloksanggul/blob/main/Screenshot%202026-05-25%20232237.png?raw=true)
 
-> *Catatan: Jika Anda memasukkan gambar ke dalam folder khusus, misalnya folder `img`, maka kodenya menjadi: `![Tampilan Web Sekolah](img/screenshot.png)`*
-
 ## 🛠️ Fitur Website
 - Sistem Informasi Sekolah
 - Manajemen Berita & Pengumuman
